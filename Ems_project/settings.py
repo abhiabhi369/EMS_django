@@ -84,13 +84,24 @@ WSGI_APPLICATION = 'Ems_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'organization',
+#         'USER': 'root',
+#         'PASSWORD': '98493@Abhi',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'organization',
-        'USER': 'root',
-        'PASSWORD': '98493@Abhi',
-        'HOST':'localhost',
+        'NAME': 'u496808428_c360soft',
+        'USER': 'u496808428_voters',
+        'PASSWORD': 'Voters!23',
+        'HOST':'itoconnect.online',
         'PORT':'3306',
     }
 }

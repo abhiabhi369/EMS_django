@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.db.models import Count
 from django.db import models
+from django.db.models.expressions import Case, When
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,7 +11,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 from Ems_app.models import (Users, Country, State, District, Constituency, Token, Voters, Todo,
-                            WardIssues, ImportanatPeople, FavourTo)
+                            WardIssues, ImportanatPeople, FavourTo, SubCaste, Caste)
 from Ems_app.forms import UsersForm, VotersForm
 from Ems_app.serializers import (CountrySerailizer, StateSerializer,WardIssuesSerializer,
                                  DistrictSerializer,ConstiSerializer, VoterSerializer)
@@ -158,24 +160,35 @@ class FavourToView(APIView):
     permission_classes = [TAuthentication]
     def get(self,request):
         dic = {}
-        a = FavourTo.objects.annotate(num_votes=models.Count('voters')).filter(state=request.user1.state.state_id)
-        print('aaaaaaaaaaa',a)
-        for i in a:
+        favours_list = FavourTo.objects.annotate(num_votes=models.Count('voters')).filter(state=request.user1.state.state_id)
+        print('aaaaaaaaaaa',favours_list)
+        for i in favours_list:
             dic[i.favour_to_name]=i.num_votes
             # dic['Count'] = i.num_votes
         return Response({'data':dic})
 
 class CasteFilter(APIView):
+    permission_classes = [TAuthentication]
     def get(self,request):
-
+        # all_caste = SubCaste.objects.annotate(num_caste=Count('voters')).filter
+        # print('all_caste',all_caste)
+        # for i in all_caste:
+        #     print(i.sub_caste_name)
+        #     print(i.num_caste)
+        #     lis.append(i.num_caste)
+        all_caste = SubCaste.objects.annotate(num_caste=Count(Case(When(voters__constituency=2,then=1)))).all()
+        print('all_caste',all_caste)
+        for i in all_caste:
+            print(i.num_caste,i.sub_caste_name)
         return Response({'message':'hello...'})
 
 
 class Check(APIView):
     permission_classes = [AllowAny]
     def get(self,request):
-        print('request.user1',request.user1['email'])
-
+        # print('request.user1',request.user1)
+        # print(Voters.objects.all().values('constituency'))
+        print('Hello...')
         return Response({'message':'hello...'})
 
 
