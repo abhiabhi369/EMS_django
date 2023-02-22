@@ -191,6 +191,11 @@ class Check(APIView):
         # print(Voters.objects.all().values('constituency'))
         print('Hello...')
         return Response({'message':'hello...'})
+    def post(self,request):
+        print("request.data",request.data)
+        return Response({"message":"Hello"})
+      
+     
 
 
 '''
