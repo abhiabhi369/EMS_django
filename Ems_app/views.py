@@ -186,6 +186,7 @@ class CasteFilter(APIView):
 class Check(APIView):
     permission_classes = [AllowAny]
     def get(self,request):
+        print("request.data",request.data)
         # print('request.user1',request.user1)
         # print(Voters.objects.all().values('constituency'))
         print('Hello...')
