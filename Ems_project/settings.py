@@ -95,17 +95,6 @@ WSGI_APPLICATION = 'Ems_project.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u496808428_c360soft',
-        'USER': 'u496808428_voters',
-        'PASSWORD': 'Voters!23',
-        'HOST':'itoconnect.online',
-        'PORT':'3306',
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
